@@ -194,6 +194,19 @@ Execute the following command with your own trained weight parameter file and th
 python pose_detector.py posenet model_iter_1000 --img data/person.png
 ```
 
+## Mixed model: Pose and SSD
+
+### Preparation
+
+1. Download both the Pose model and the SSD300 model trained with COCO([download url](https://drive.google.com/open?id=0BzKzrI_SkD1_dUY1Ml9GRTFpUWc)), and put `models` in
+2. Convert model with following commands
+
+```sh
+cd models
+tar -zxvf models_VGGNet_coco_SSD_300x300.tar.gz
+mv models ssd
+python convert_pose_ssd.py
+```
 
 
 

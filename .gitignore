@@ -9,3 +9,6 @@ result.png
 *.caffemodel
 *.chainermodel
 *.npz
+
+models/models_VGGNet_coco_SSD_300x300.tar.gz
+models/ssd
