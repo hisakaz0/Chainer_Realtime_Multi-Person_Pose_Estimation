@@ -6,6 +6,7 @@ from chainer.links import caffe
 
 from chainercv.links.model.ssd.multibox import Multibox
 from chainercv.links.model.ssd.ssd_vgg16 import VGG16Extractor300
+from chainercv.links.model.ssd.normalize import Normalize
 
 
 class ConvNet(link.Chain):
@@ -59,6 +60,8 @@ class LatterSsdNet(link.Chain):
     def __init__(self, n_fg_class):
         super(LatterSsdNet, self).__init__()
         with self.init_scope():
+            self.norm4 = Normalize(512)
+
             # remained conv net in VGG16 class: chainercv/links/model/ssd/ssd_vgg16.py
             self.conv5_1 = L.DilatedConvolution2D(512, 3, pad=1)
             self.conv5_2 = L.DilatedConvolution2D(512, 3, pad=1)
@@ -90,6 +93,7 @@ class LatterSsdNet(link.Chain):
         # `h` is output from ConvNet.
         ys = []
 
+        ys.append(self.norm4(h))
         h = F.max_pooling_2d(h, 2)
 
         h = F.relu(self.conv5_1(h))
