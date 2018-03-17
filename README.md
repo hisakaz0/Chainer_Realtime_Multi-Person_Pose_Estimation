@@ -209,6 +209,15 @@ python convert_pose_ssd.py
 ```
 
 
+## Overlay the result: SSD and posenet
+
+```sh
+script/mp4_to_png.sh <mp4_file> <png_dir>
+script/create_image_list.sh <png_dir> <image_list_file>
+fake_ssd_pose.py -out <res_png_dir> \
+  posenet models/coco_posenet.npz <png_dir> <image_list_file>
+script/png_to_mp4.sh <res_png_dir> <res_mp4_file>
+```
 
 ## Related repository
 - CVPR'16, [Convolutional Pose Machines](https://github.com/shihenw/convolutional-pose-machines-release).
